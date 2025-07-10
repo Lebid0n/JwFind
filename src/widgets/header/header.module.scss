@@ -1,0 +1,105 @@
+// header.module.scss
+@import '@/shared/styles/themes/baseLight.scss';
+@import '@/shared/styles/mixins';
+@import '@/shared/styles/reset.scss';
+@import '@/shared/styles/variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  height: 10vh;
+
+  @include flex-center;
+  gap: #{gap};
+
+  background-color: #{$blue-900};
+
+  .globalLinkContainer {
+    width: 30%;
+
+    display: flex;
+
+    color: #{$blue-100};
+
+    padding: $padding*2;
+
+    font-size: 2vw;
+  }
+
+  .searchBarContainer {
+    width: 60%;
+
+    @include flex-center;
+
+    .searchBar {
+      width: 50%;
+
+      border: none;
+      border-radius: 1vw 0 0 1vw;
+
+      padding: $search-bar-padding;
+      
+      background-color: $blue-100;
+      
+      transition: $transition;
+
+      &:focus {
+        outline: #{$blue-50};
+        background: linear-gradient(to right, $blue-700 0%, mix($blue-700, $blue-100, 50%) 50%, $blue-100 100%);
+        transition: 0.5s;
+      }
+
+      &::placeholder {
+        color: #{$blue-900};
+      }
+    }
+
+    .clearButn {
+      @include flex-center;
+
+      width: 2vw;
+      height: 2vw;
+
+      background-color: $blue-100;
+    }
+    
+    .searchButn {
+      @include flex-center;
+
+      width: 2vw;
+      height: 2vw;
+
+      border-radius: 0 1vw 1vw 0;
+
+      background-color: $blue-100;
+
+      svg {
+        stroke-width: 0.1vw;
+      }
+    }
+  }
+
+  .butnContainer {
+    width: 30%;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    padding: $padding*2;
+    gap: $gap;
+
+    .translatorButn {
+      @include flex-center;
+      @include headerButnStyles;
+    }
+
+    .profileButn {
+      @include flex-center;
+      @include headerButnStyles;
+    }
+
+  }
+}

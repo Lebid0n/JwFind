@@ -1,0 +1,47 @@
+@import "../../shared/styles/mixins.scss";
+@import "../../shared/styles/themes/baseLight.scss";
+@import "../../shared/styles/variables.scss";
+
+.authorization {
+  @include flex-center;
+
+  width: 25vw;
+  height: 50vh;
+
+  border-radius: $border-1vw;
+
+  background-color: $blue-100;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+
+    input {
+      border: none;
+      border-radius: $border-1vw;
+
+      padding: $padding;
+
+      transition: 0.1s;
+    }
+
+    input:hover {
+      border-left: 0.2vw solid $blue-700;
+
+      transition: 0.1s;
+    }
+
+    button {
+      width: 60%;
+
+      border-radius: $border-1vw;
+
+      padding: $padding;
+
+      background-color: $blue-700;
+    }
+  }
+}

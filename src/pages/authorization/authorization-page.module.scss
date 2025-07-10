@@ -1,0 +1,9 @@
+@import "../../shared/styles/mixins.scss";
+@import "../../shared/styles/themes/baseLight.scss";
+
+
+.body {
+  @include flex-center;
+
+  background-color: $blue-50;
+}

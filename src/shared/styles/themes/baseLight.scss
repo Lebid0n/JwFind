@@ -1,0 +1,42 @@
+$blue-900: #022B3A;
+$blue-700: #1F7ABC;
+$blue-600: #16629c;
+$blue-100: #BFDBF7;
+$blue-50: #E1E5F2;
+
+$white: #ffffff;
+$black: #000000;
+
+$red-500: #ff0000;
+$red-100: #ffb0b0;
+
+$yellow-500: #ffe149;
+$yellow-100: #ffec8d;
+
+:root {
+  // base
+  --color-bg: #{$white};
+  --color-text: #{$black};
+  // div
+  --color-div-primary: #{$blue-100};
+  --color-div-secondary: #{$blue-50};
+  --color-div-tertiary: #{$blue-700};
+  // element-base
+  --color-element-base: #{$blue-900};
+  --color-element-hover: #{$blue-700};
+  // button
+  --color-btn-primary: #{$blue-700};
+  --color-btn-hover: #{$blue-600};
+  // input
+  --color-input-border: #{$blue-50};
+  --color-input-focus: #{$blue-100};
+  // header
+  --color-header-bg: #{$blue-900};
+  --color-header-text: #{$blue-100};
+  // footer
+  --color-footer-bg: #{$blue-900};
+  --color-footer-text: #{$white};
+  // error
+  --color-error-bg: #{$red-100};
+  --color-error-text: #{$red-500};
+}

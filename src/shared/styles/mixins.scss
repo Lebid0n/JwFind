@@ -1,0 +1,21 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin headerButnStyles {
+  background-color: $blue-100;
+  color: $blue-900;
+
+  border-radius: $border-50pcnt;
+
+  padding: $padding;
+
+  svg {
+    width: 1.5vw;
+    height: 1.5vw;
+
+    stroke-width: 0.5vw;
+  }
+}
