@@ -2,8 +2,11 @@
 @import "../../shared/styles/themes/baseLight.scss";
 
 
-.body {
+.content {
   @include flex-center;
+
+  width: 100vw;
+  height: 100vh;
 
   background-color: $blue-50;
 }

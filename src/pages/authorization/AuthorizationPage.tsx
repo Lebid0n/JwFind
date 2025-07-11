@@ -3,9 +3,9 @@ import Authorization from '@/widgets/authorizationPanel/Authorization';
 
 function AuthorizationPage() {
   return(
-    <body className={styles.body}>
+    <div className={styles.content}>
       <Authorization />
-    </body>
+    </div>
   )
 }
 

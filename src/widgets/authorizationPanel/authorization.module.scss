@@ -3,7 +3,11 @@
 @import "../../shared/styles/variables.scss";
 
 .authorization {
-  @include flex-center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
 
   width: 25vw;
   height: 50vh;
@@ -34,6 +38,14 @@
       transition: 0.1s;
     }
 
+    input:focus {
+      border: 0.15vw solid $blue-700;
+
+      outline: none;
+
+      transition: 0.1s;
+    }
+
     button {
       width: 60%;
 
@@ -42,6 +54,56 @@
       padding: $padding;
 
       background-color: $blue-700;
+      color: $blue-100;
+
+      transition: 0.5s;
+    }
+
+    button:hover {
+      background-color: rgb(94, 172, 94);
+
+      transition: 0.5s;
+    }
+
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+
+    .changeModeButn {
+      border-radius: $border-1vw;
+  
+      padding: $padding;
+  
+      background-color: darkblue;
+      
+      transition: 0.5s;
+  
+      color: $blue-100;
+
+      &:hover {
+        background-color: rgb(76, 76, 196);
+      }
+    }
+  
+
+    .back {
+      border-radius: $border-1vw;
+  
+      padding: $padding;
+  
+      background-color: darkblue;
+      
+      transition: 0.5s;
+  
+      color: $blue-100;
+
+      &:hover {
+        background-color: rgb(76, 76, 196);
+      }
     }
   }
 }
