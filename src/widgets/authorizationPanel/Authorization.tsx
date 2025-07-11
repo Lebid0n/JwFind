@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./authorization.module.scss";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 interface NewUserData {
   email: string;
@@ -28,13 +29,32 @@ function Authorization() {
   });
 
   function handleRegistration(e: React.FormEvent) {
-    e.preventDefault();
-    console.log("Sending data for registration", newUserData);
+    async function handleRegistration(e: React.FormEvent) {
+      e.preventDefault();
+      try {
+        const response = await axios.post('http://localhost:3000/api/register', newUserData);
+        console.log("Registration successful:", response.data);
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
+    }
   }
 
   function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    console.log("Sending data for login", loginData);
+      async function handleLogin(e: React.FormEvent) {
+      e.preventDefault();
+
+      try {
+        const response = await axios.post('http://localhost:3000/api/login', loginData);
+        // Предположим, сервер возвращает токен в поле `token`
+        const token = response.data.token;
+        // Сохрани токен в localStorage или cookie
+        localStorage.setItem('token', token);
+        console.log("Login successful, token saved:", token);
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    }
   }
 
   return (
