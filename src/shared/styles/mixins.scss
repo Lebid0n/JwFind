@@ -1,3 +1,6 @@
+@use './variables' as variables;
+@use './themes/baseLight.scss' as baseLight;
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -5,12 +8,12 @@
 }
 
 @mixin headerButnStyles {
-  background-color: $blue-100;
-  color: $blue-900;
+  background-color: baseLight.$blue-100;
+  color: baseLight.$blue-900;
 
-  border-radius: $border-50pcnt;
+  border-radius: variables.$border-50pcnt;
 
-  padding: $padding;
+  padding: variables.$padding;
 
   svg {
     width: 1.5vw;

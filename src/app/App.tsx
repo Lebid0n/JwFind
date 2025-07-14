@@ -1,10 +1,11 @@
 // pages
-import About from "@/pages/about/About"
-import AuthorizationPage from "@/pages/authorization/AuthorizationPage"
-import BooksCatalog from "@/pages/books-catalog/BooksCatalog"
-import Error from "@/pages/error/Error"
 import HomePage from "@/pages/home/HomePage"
-import Profile from "@/pages/profile/Profile"
+import About from "@/pages/about/AboutPage"
+import AuthorizationPage from "@/pages/authorization/AuthorizationPage"
+import Profile from "@/pages/profile/ProfilePage"
+import ProfilePage from "@/pages/profile/ProfilePage"
+import BooksCatalog from "@/pages/books-catalog/BooksCatalogPage"
+import Error from "@/pages/error/ErrorPage"
 // react
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
         <Route path="*" element={<Error />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   )

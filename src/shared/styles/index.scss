@@ -1,7 +1,7 @@
 // base-options
-@import './mixins.scss';
-@import './reset.scss';
-@import './variables.scss';
+@forward './mixins.scss';
+@forward './reset.scss';
+@forward './variables.scss';
 
 // base-themes
-@import './themes/baseLight.scss';
+@forward './themes/baseLight.scss';

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import styles from "./authorization.module.scss";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+
+import styles from "./authorization.module.scss";
 
 interface NewUserData {
   email: string;
@@ -28,32 +29,28 @@ function Authorization() {
     password: "",
   });
 
-  function handleRegistration(e: React.FormEvent) {
-    async function handleRegistration(e: React.FormEvent) {
-      e.preventDefault();
-      try {
-        const response = await axios.post('http://localhost:3000/api/register', newUserData);
-        console.log("Registration successful:", response.data);
-      } catch (error) {
-        console.error("Registration failed:", error);
-      }
+  async function handleRegistration(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/api/register', newUserData);
+      console.log("Registration successful:", response.data);
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
   }
 
-  function handleLogin(e: React.FormEvent) {
-      async function handleLogin(e: React.FormEvent) {
-      e.preventDefault();
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
 
-      try {
-        const response = await axios.post('http://localhost:3000/api/login', loginData);
-        // Предположим, сервер возвращает токен в поле `token`
-        const token = response.data.token;
-        // Сохрани токен в localStorage или cookie
-        localStorage.setItem('token', token);
-        console.log("Login successful, token saved:", token);
-      } catch (error) {
-        console.error("Login failed:", error);
-      }
+    try {
+      const response = await axios.post('http://localhost:3000/api/login', loginData);
+      // Предположим, сервер возвращает токен в поле `token`
+      const token = response.data.token;
+      // Сохрани токен в localStorage или cookie
+      localStorage.setItem('token', token);
+      console.log("Login successful, token saved:", token);
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   }
 
@@ -133,7 +130,7 @@ function Authorization() {
               className={`${styles.input} nunito-primary`}
             />
             <button type="submit" className={`nunito-primary`}>
-              Welcome!
+              Welcome
             </button>
           </form>
           <div className={styles.options}>

@@ -1,79 +1,70 @@
-// header.module.scss
-@import '@/shared/styles/themes/baseLight.scss';
-@import '@/shared/styles/mixins';
-@import '@/shared/styles/reset.scss';
-@import '@/shared/styles/variables.scss';
+@use 'sass:color';
+@use '@/shared/styles/reset.scss';
+@use '@/shared/styles/themes/baseLight.scss' as baseColor;
+@use '@/shared/styles/mixins' as mixins;
+@use '@/shared/styles/variables' as variables;
 
 * {
   box-sizing: border-box;
 }
 
 .header {
+  @include mixins.flex-center;  
+
   height: 10vh;
-
-  @include flex-center;
-  gap: #{gap};
-
-  background-color: #{$blue-900};
+  gap: variables.$gap;
+  background-color: baseColor.$blue-900;
 
   .globalLinkContainer {
     width: 30%;
-
     display: flex;
-
-    color: #{$blue-100};
-
-    padding: $padding*2;
-
+    color: baseColor.$blue-100;
+    padding: variables.$padding * 2;
     font-size: 2vw;
   }
 
   .searchBarContainer {
     width: 60%;
-
-    @include flex-center;
+    @include mixins.flex-center;
 
     .searchBar {
       width: 50%;
+      height: 2vw;
 
       border: none;
       border-radius: 1vw 0 0 1vw;
-
-      padding: $search-bar-padding;
-      
-      background-color: $blue-100;
-      
-      transition: $transition;
+      padding: variables.$search-bar-padding;
+      background-color: baseColor.$blue-100;
+      transition: 0.5s;
 
       &:focus {
-        outline: #{$blue-50};
-        background: linear-gradient(to right, $blue-700 0%, mix($blue-700, $blue-100, 50%) 50%, $blue-100 100%);
-        transition: 0.5s;
+        outline: baseColor.$blue-50;
+        background: linear-gradient(
+          to right,
+          baseColor.$blue-700 0%,
+          color.mix(baseColor.$blue-700, baseColor.$blue-100, 50%) 50%,
+          baseColor.$blue-100 100%
+        );
       }
 
       &::placeholder {
-        color: #{$blue-900};
+        color: baseColor.$blue-900;
       }
     }
 
     .clearButn {
-      @include flex-center;
-
+      @include mixins.flex-center;
       width: 2vw;
       height: 2vw;
-
-      background-color: $blue-100;
+      background-color: baseColor.$blue-100;
     }
-    
-    .searchButn {
-      @include flex-center;
 
+    .searchButn {
+      @include mixins.flex-center;
       width: 2vw;
       height: 2vw;
-
       border-radius: 0 1vw 1vw 0;
-
-      background-color: $blue-100;
+      background-color: baseColor.$blue-100;
 
       svg {
         stroke-width: 0.1vw;
@@ -83,23 +74,20 @@
 
   .butnContainer {
     width: 30%;
-
     display: flex;
     justify-content: end;
     align-items: center;
-
-    padding: $padding*2;
-    gap: $gap;
+    padding: variables.$padding * 2;
+    gap: variables.$gap;
 
     .translatorButn {
-      @include flex-center;
-      @include headerButnStyles;
+      @include mixins.flex-center;
+      @include mixins.headerButnStyles;
     }
 
     .profileButn {
-      @include flex-center;
-      @include headerButnStyles;
+      @include mixins.flex-center;
+      @include mixins.headerButnStyles;
     }
-
   }
 }

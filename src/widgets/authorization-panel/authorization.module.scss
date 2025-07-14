@@ -39,10 +39,8 @@
     }
 
     input:focus {
-      border: 0.15vw solid $blue-700;
-
-      outline: none;
-
+      outline: 0.15vw solid $blue-700;
+      
       transition: 0.1s;
     }
 

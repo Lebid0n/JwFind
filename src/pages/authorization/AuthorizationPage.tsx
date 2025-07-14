@@ -1,5 +1,5 @@
 import styles from './authorization-page.module.scss'
-import Authorization from '@/widgets/authorizationPanel/Authorization';
+import Authorization from '@/widgets/authorization-panel/Authorization';
 
 function AuthorizationPage() {
   return(

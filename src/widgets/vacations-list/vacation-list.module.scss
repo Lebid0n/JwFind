@@ -1,0 +1,36 @@
+@use "../../shared/styles/mixins.scss" as mixin;
+@use "../../shared/styles/themes/baseLight.scss" as baseColor;
+@use "../../shared/styles/variables.scss" as variable;
+
+.vacationList {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: variable.$gap;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: baseColor.$blue-100;
+
+  padding: variable.$gap * 2;
+
+  .vacationCard {
+    width: 40vw;
+    height: 50vh;
+
+    background-color: baseColor.$blue-700;
+
+    border-radius: variable.$border-1vw / 2;
+
+    padding: variable.$padding * 2;
+
+    .title,
+    .description {
+      color: baseColor.$white;
+    }
+  }
+}
