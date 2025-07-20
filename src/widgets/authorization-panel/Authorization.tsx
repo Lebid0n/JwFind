@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios';
-
+import { Link, useNavigate } from "react-router-dom"; // Добавляем useNavigate для редиректа
+import axios from "axios";
 import styles from "./authorization.module.scss";
 
 interface NewUserData {
   email: string;
   password: string;
   login: string;
+  isEmployer: boolean;
 }
 
 interface UserLoginData {
@@ -17,11 +17,14 @@ interface UserLoginData {
 
 function Authorization() {
   const [regLogPanel, setRegLogPanel] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const [newUserData, setNewUserData] = useState<NewUserData>({
     email: "",
     password: "",
     login: "",
+    isEmployer: false,
   });
 
   const [loginData, setLoginData] = useState<UserLoginData>({
@@ -31,25 +34,36 @@ function Authorization() {
 
   async function handleRegistration(e: React.FormEvent) {
     e.preventDefault();
+    setError(null);
     try {
-      const response = await axios.post('http://localhost:3000/api/register', newUserData);
+      const response = await axios.post(
+        "http://localhost:3000/api/register",
+        newUserData,
+        { withCredentials: true }
+      );
       console.log("Registration successful:", response.data);
-    } catch (error) {
+      setRegLogPanel(false);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.error || "Ошибка регистрации";
+      setError(errorMessage);
       console.error("Registration failed:", error);
     }
   }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-
+    setError(null);
     try {
-      const response = await axios.post('http://localhost:3000/api/login', loginData);
-      // Предположим, сервер возвращает токен в поле `token`
-      const token = response.data.token;
-      // Сохрани токен в localStorage или cookie
-      localStorage.setItem('token', token);
-      console.log("Login successful, token saved:", token);
-    } catch (error) {
+      const response = await axios.post(
+        "http://localhost:3000/api/login",
+        loginData,
+        { withCredentials: true }
+      );
+      console.log("Login successful:", response.data);
+      navigate("/profile");
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.error || "Ошибка входа";
+      setError(errorMessage);
       console.error("Login failed:", error);
     }
   }
@@ -59,9 +73,8 @@ function Authorization() {
       {regLogPanel ? (
         <div className={styles.authorization}>
           <form onSubmit={handleRegistration} className={styles.form}>
-            <h1 className={`${styles.text} nunito-primary`}>
-              You are new here, right?
-            </h1>
+            <h1 className={`${styles.text} nunito-primary`}>You are new here, right?</h1>
+            {error && <p className={`${styles.error} nunito-primary`}>{error}</p>}
             <input
               type="email"
               placeholder="Email"
@@ -92,23 +105,36 @@ function Authorization() {
               required
               className={`${styles.input} nunito-primary`}
             />
+            <label className={`${styles.label} nunito-primary`}>Are you an employer?</label>
+            <input
+              type="checkbox"
+              checked={newUserData.isEmployer}
+              onChange={(e) =>
+                setNewUserData({ ...newUserData, isEmployer: e.target.checked })
+              }
+              className={`${styles.checkbox} nunito-primary`}
+            />
             <button type="submit" className={`nunito-primary`}>
               Create
             </button>
           </form>
           <div className={styles.options}>
-            <Link to={"/"} className={styles.back}>
-                Back
+            <Link to="/" className={styles.back}>
+              Back
             </Link>
-            <button onClick={() => setRegLogPanel(false)} className={styles.changeModeButn}>Login</button>
+            <button
+              onClick={() => setRegLogPanel(false)}
+              className={styles.changeModeButn}
+            >
+              Login
+            </button>
           </div>
         </div>
       ) : (
         <div className={styles.authorization}>
           <form onSubmit={handleLogin} className={styles.form}>
-            <h1 className={`${styles.text} nunito-primary`}>
-              How it's going on?
-            </h1>
+            <h1 className={`${styles.text} nunito-primary`}>How it's going on?</h1>
+            {error && <p className={`${styles.error} nunito-primary`}>{error}</p>}
             <input
               type="email"
               placeholder="Email"
@@ -134,10 +160,15 @@ function Authorization() {
             </button>
           </form>
           <div className={styles.options}>
-            <Link to={"/"} className={styles.back}>
-                Back
+            <Link to="/" className={styles.back}>
+              Back
             </Link>
-            <button onClick={() => setRegLogPanel(true)} className={styles.changeModeButn}>Register</button>
+            <button
+              onClick={() => setRegLogPanel(true)}
+              className={styles.changeModeButn}
+            >
+              Register
+            </button>
           </div>
         </div>
       )}

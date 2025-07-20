@@ -1,39 +1,51 @@
-// react
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // styles
-import '@/assets/font/mainFont.scss'
-import styles from './header.module.scss'
+import '@/assets/font/mainFont.scss';
+import styles from './header.module.scss';
 // icons
-import { FaRegUser } from "react-icons/fa6";
-import { IoLanguage } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
-import { CiSearch } from "react-icons/ci";
+import { FaRegUser } from 'react-icons/fa6';
+import { IoLanguage } from 'react-icons/io5';
+import { RxCross2 } from 'react-icons/rx';
+import { CiSearch } from 'react-icons/ci';
 
-function Header() {
-  const [search, setSearch] = useState<string>('')
+interface HeaderProps {
+  onSearch: (query: string) => void; // Callback для передачи поискового запроса
+}
 
-  return(
+function Header({ onSearch }: HeaderProps) {
+  const [search, setSearch] = useState<string>('');
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearch(query);
+    onSearch(query); // Передаем запрос в родительский компонент
+  };
+
+  const clearSearch = () => {
+    setSearch('');
+    onSearch(''); // Сбрасываем фильтр
+  };
+
+  return (
     <header className={styles.header}>
       {/* globalLink */}
       <div className={styles.globalLinkContainer}>
         <Link className={styles.link} to="/">
-          <h1 className='nunito-bald'>
-            JwFind
-          </h1>
+          <h1 className="nunito-bald">JwFind</h1>
         </Link>
       </div>
       {/* searchBar */}
       <div className={styles.searchBarContainer}>
-        <input 
+        <input
           type="text"
-          placeholder="?"
+          placeholder="Поиск вакансий..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className={`${styles.searchBar} nunito-bald`} 
+          onChange={handleSearch}
+          className={`${styles.searchBar} nunito-bald`}
         />
-        {search !== "" && (
-          <button onClick={() => setSearch('')} className={styles.clearButn}>
+        {search !== '' && (
+          <button onClick={clearSearch} className={styles.clearButn}>
             <RxCross2 />
           </button>
         )}
@@ -51,7 +63,7 @@ function Header() {
         </Link>
       </div>
     </header>
-  )
+  );
 }
 
 export default Header;

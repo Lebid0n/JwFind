@@ -43,7 +43,7 @@
       
       transition: 0.1s;
     }
-
+    
     button {
       width: 60%;
 
@@ -103,5 +103,11 @@
         background-color: rgb(76, 76, 196);
       }
     }
+  }
+
+  .error {
+    color: red;
+    font-size: 1vw;
+    margin-bottom: 0.5vw;
   }
 }

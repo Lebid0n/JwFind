@@ -33,4 +33,32 @@
       color: baseColor.$white;
     }
   }
+
+  .loading {
+  text-align: center;
+  padding: variable.$padding * 2;
+  color: #666;
+  font-size: 1.5vw;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: variable.$border-1vw;
+
+  padding: variable.$padding * 2;
+
+  font-size: 1.5vw;
+
+  color: baseColor.$red-100;
+  background-color: baseColor.$red-500;
+}
+
+.noResults {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
 }
