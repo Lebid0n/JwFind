@@ -18,9 +18,11 @@
 
   padding: variable.$gap * 2;
 
+  overflow: scroll;
+
   .vacationCard {
     width: 40vw;
-    height: 50vh;
+    height: 20vh;
 
     background-color: baseColor.$blue-700;
 
@@ -61,4 +63,15 @@
   padding: 20px;
   color: #666;
 }
+}
+
+.noVacations {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: red;
+
+  p {
+
+  }
 }

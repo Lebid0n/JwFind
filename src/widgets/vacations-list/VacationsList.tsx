@@ -1,66 +1,86 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './vacation-list.module.scss';
-import Header from '@/widgets/header/Header';
+import Header from '../header/Header';
 
 interface Vacation {
   id: number;
-  title: string;
-  description: string;
+  name: string;
+  description: string | null;
 }
 
 function VacationsList() {
   const [vacations, setVacations] = useState<Vacation[]>([]);
-  const [filteredVacancies, setFilteredVacancies] = useState<Vacation[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [filteredVacations, setFilteredVacations] = useState<Vacation[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchVacations() {
-      setIsLoading(true);
+    const fetchVacations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/home');
-        setVacations(response.data);
-        setFilteredVacancies(response.data);
-        setError(null);
-      } catch (error) {
-        console.error('Ошибка при получении данных', error);
-        setError('Не удалось загрузить вакансии. Попробуйте позже.');
+        const response = await axios.get('http://localhost:3000/api/home', {
+          withCredentials: true,
+          timeout: 5000,
+        });
+        console.log('Ответ сервера:', response.data);
+        const vacations = response.data.vacations || response.data;
+        if (Array.isArray(vacations)) {
+          setVacations(vacations);
+          setFilteredVacations(vacations); // Изначально отображаем все вакансии
+        } else {
+          throw new Error('Данные вакансий имеют неверный формат');
+        }
+      } catch (err: any) {
+        console.error('Ошибка получения вакансий:', err);
+        setError(err.response?.data?.error || err.message || 'Не удалось загрузить вакансии');
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
-    }
+    };
     fetchVacations();
   }, []);
 
+  // Функция для фильтрации вакансий по поисковому запросу
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
-    const filtered = vacations.filter((vacation) =>
-      vacation.title.toLowerCase().includes(lowerCaseQuery)
+    const filtered = vacations.filter(
+      (vacation) =>
+        vacation.name.toLowerCase().includes(lowerCaseQuery) ||
+        (vacation.description && vacation.description.toLowerCase().includes(lowerCaseQuery))
     );
-    setFilteredVacancies(filtered);
+    setFilteredVacations(filtered);
   };
 
-  return (
-    <div>
+  if (loading) {
+    return <div className={styles.loading}>Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>Ошибка: {error}</div>;
+  }
+
+  if (filteredVacations.length === 0) {
+    return 
+    <div className={styles.noVacations}>
       <Header onSearch={handleSearch} />
-      <div className={styles.vacationList}>
-        {isLoading ? (
-          <p className={`${styles.loading} nunito-primary`}>Загрузка...</p>
-        ) : error ? (
-          <p className={`${styles.error} nunito-primary`}>{error}</p>
-        ) : filteredVacancies.length > 0 ? (
-          filteredVacancies.map((vacation) => (
-            <div key={vacation.id} className={styles.vacationCard}>
-              <h2 className={`${styles.title} nunito-primary`}>{vacation.title}</h2>
-              <p className={`${styles.description} nunito-primary`}>{vacation.description}</p>
-            </div>
-          ))
-        ) : (
-          <p className={`${styles.noResults} nunito-primary`}>Вакансии не найдены</p>
-        )}
-      </div>
+      <p>Вакансии не найдены</p>
     </div>
+  }
+
+  return (
+    <>
+      <Header onSearch={handleSearch} />
+      <div>
+        <ul className={styles.vacationList}>
+          {filteredVacations.map((vacation) => (
+            <li className={styles.vacationCard} key={vacation.id}>
+              <h2>{vacation.name}</h2>
+              {vacation.description && <p>{vacation.description}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
