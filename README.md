@@ -1,3 +1,3 @@
 # Simple "search job" app
-I have used a Vite + React + T.S. as a base and SCSS for styles.
-Server was made with JS and use MySQL as data base.
+I used Vite with React and TypeScript as the base, and SCSS for styling. 
+The server was built with JavaScript and uses MySQL as the database.
