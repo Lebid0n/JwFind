@@ -1,0 +1,176 @@
+@use 'sass:color';
+@use '@/shared/styles/reset.scss';
+@use '@/shared/styles/themes/baseLight.scss' as baseColor;
+@use '@/shared/styles/mixins' as mixins;
+@use '@/shared/styles/variables' as variables;
+
+.profileContainer {
+  width: 90vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: variables.$gap;
+
+  background-color: baseColor.$blue-100;
+
+  overflow-y: scroll;
+
+  .avatarAndName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+
+    padding: 2vw;
+
+    .avatar {
+      width: 6vw;
+      height: 6vw;
+
+      border: 0.2vw solid baseColor.$blue-700;
+      border-radius: variables.$border-50pcnt;
+    }
+    
+    .defaultAvatar {
+      width: 6vw;
+      height: 6vw;
+
+      border: 0.2vw solid baseColor.$blue-700;
+      border-radius: variables.$border-50pcnt;  
+
+      color: baseColor.$blue-900;
+    }
+    
+    .name {
+      background-color: baseColor.$blue-700;
+      border-radius: variables.$border-1vw;
+
+      padding: variables.$padding;
+
+      font-size: 1vw;
+    }
+  }
+
+  .descriptionAndLinks {
+    width: 50vw;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: variables.$gap;
+
+    border: 0.2vw solid baseColor.$blue-700;
+    border-top: 1.5vw solid baseColor.$blue-700;
+
+    background-color: baseColor.$blue-50;
+
+    .description {
+      width: 100%;
+      height: 95%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      overflow-x: hidden;
+      overflow-y: scroll;
+
+      padding: variables.$padding;
+    }
+
+  }
+
+  .descriptionInput {
+    width: 90%;
+    height: 20%;
+    max-width: 90%;
+    max-height: 85%;
+    min-width: 10%;
+    min-height: 20%;
+  }
+
+  .saveDescButn {
+    border-radius: variables.$border-1vw;
+    padding: variables.$padding;
+    
+    background-color: baseColor.$blue-100;
+    
+    &:hover {
+      outline: 0.15vw solid baseColor.$blue-700;
+    }
+  }
+
+  .editModeButn {
+    border-radius: variables.$border-1vw;
+    padding: variables.$padding;
+    
+    background-color: baseColor.$red-100;
+    
+    &:hover {
+      outline: 0.15vw solid baseColor.$red-500;
+    }
+  }
+
+  .vacationManager {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .vacationForm {
+      width: 50vw;
+      height: 20vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: variables.$gap;
+        
+      padding: variables.$padding;
+
+      border: 0.2vw solid baseColor.$blue-700;
+      border-top: 1.5vw solid baseColor.$blue-700;
+
+      background-color: baseColor.$blue-50;
+ 
+      .vacationNameInput {
+        border: none;
+        border-radius: variables.$border-1vw;
+
+        padding: variables.$padding;
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: variables.$gap;
+
+        .vacationDescriptionInput {
+          width: 30vw;
+          height: 20vh;
+          max-width: 40vw;
+          max-height: 8vh;
+          min-width: 10vw;
+          min-height: 5vh;
+        }
+
+        .createVacationButn {
+          width: fit-content;
+          height: fit-content;
+
+          border: none;
+          border-radius: variables.$border-1vw;
+
+          padding: variables.$padding;
+
+          background-color: baseColor.$blue-100;
+        }
+      }
+    }
+  }
+}

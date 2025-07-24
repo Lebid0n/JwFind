@@ -26,7 +26,7 @@ function VacationsList() {
         const vacations = response.data.vacations || response.data;
         if (Array.isArray(vacations)) {
           setVacations(vacations);
-          setFilteredVacations(vacations); // Изначально отображаем все вакансии
+          setFilteredVacations(vacations);
         } else {
           throw new Error('Данные вакансий имеют неверный формат');
         }
@@ -57,14 +57,6 @@ function VacationsList() {
 
   if (error) {
     return <div className={styles.error}>Ошибка: {error}</div>;
-  }
-
-  if (filteredVacations.length === 0) {
-    return 
-    <div className={styles.noVacations}>
-      <Header onSearch={handleSearch} />
-      <p>Вакансии не найдены</p>
-    </div>
   }
 
   return (

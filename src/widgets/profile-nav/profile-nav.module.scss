@@ -33,4 +33,24 @@
       outline: 0.2vw solid colors.$blue-700;
     }
   }
+
+  .logout {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: variable.$border-1vw / 2;
+
+    padding: variable.$padding;
+    
+    background-color: colors.$red-100;
+    color: colors.$black;
+  
+    &:hover {
+      outline: 0.2vw solid colors.$red-500;
+    }
+  }
 }
